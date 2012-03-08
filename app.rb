@@ -6,7 +6,7 @@ require 'amqp'
 enable :loggning
 configure do
   EM.next_tick do
-    AMQP.connect ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost'
+    AMQP.connection = AMQP.connect ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost'
   end
 end
 
