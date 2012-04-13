@@ -18,6 +18,7 @@ post '/publish' do
   # publish a message to a fanout exchange
   AMQP::Channel.new do |channel|
     channel.fanout("f1").publish "Hello, world!"
+    channel.close
   end
   204
 end
