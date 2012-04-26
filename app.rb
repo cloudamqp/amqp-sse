@@ -26,7 +26,7 @@ end
 get '/stream', provides: 'text/event-stream' do
   stream :keep_open do |out|
     AMQP::Channel.new do |channel|
-      channel.queue do |queue|
+      channel.queue('', exclusive: true) do |queue|
         # create a queue and bind it to the fanout exchange
         queue.bind(channel.fanout("f1")).subscribe do |payload|
           out << "data: #{payload}\n\n"
