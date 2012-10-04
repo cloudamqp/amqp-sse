@@ -6,7 +6,8 @@ require 'amqp'
 configure do
   EM.next_tick do
     # Connect to CloudAMQP and set the default connection
-    AMQP.connection = AMQP.connect ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost'
+    url = ENV['CLOUDAMQP_URL'].sub(/^amqp/, 'amqps')
+    AMQP.connection = AMQP.connect url
   end
 end
 
