@@ -18,8 +18,9 @@ end
 post '/publish' do
   # publish a message to a fanout exchange
   AMQP::Channel.new do |channel|
-    channel.fanout("f1").publish "Hello, world!"
-    channel.close
+    channel.fanout("f1").publish "Hello, world!" do
+      channel.close
+    end
   end
   204
 end
@@ -35,7 +36,7 @@ get '/stream', provides: 'text/event-stream' do
       end
 
       # add a timer to keep the connection alive 
-      timer = EM.add_periodic_timer(2) { out << ":\n" } 
+      timer = EM.add_periodic_timer(20) { out << ":\n" } 
       
       # clean up when the user closes the stream
       out.callback do
