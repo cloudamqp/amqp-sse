@@ -6,7 +6,7 @@ require 'amqp'
 configure do
   EM.next_tick do
     # Connect to CloudAMQP and set the default connection
-    url = ENV['CLOUDAMQP_URL'].sub(/^amqp/, 'amqps')
+    url = ENV['CLOUDAMQP_URL'] || "amqp://guest:guest@localhost"
     AMQP.connection = AMQP.connect url
   end
 end
@@ -35,7 +35,7 @@ get '/stream', provides: 'text/event-stream' do
       end
 
       # add a timer to keep the connection alive 
-      timer = EM.add_periodic_timer(20) { out << ":\n" } 
+      timer = EM.add_periodic_timer(2) { out << ":\n" } 
       
       # clean up when the user closes the stream
       out.callback do
