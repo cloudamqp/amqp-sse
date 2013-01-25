@@ -1,1 +1,1 @@
-web: bundle exec ruby app.rb -p $PORT -e production
+web: bin/thin start -p $PORT -e production
