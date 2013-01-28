@@ -13,7 +13,7 @@ GEM
     daemons (1.1.9)
     eventmachine (1.0.0)
     haml (3.1.7)
-    rack (1.4.4)
+    rack (1.5.0)
     rack-protection (1.3.2)
       rack
     rack-test (0.6.2)
@@ -41,7 +41,6 @@ PLATFORMS
 DEPENDENCIES
   amqp
   haml
-  rack (~> 1.4.4)
   sinatra
   sinatra-contrib
   thin
