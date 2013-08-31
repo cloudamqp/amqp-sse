@@ -4,6 +4,7 @@ require 'haml'
 require 'amqp'
 
 configure do
+  disable :logging
   EM.next_tick do
     # Connect to CloudAMQP and set the default connection
     url = ENV['CLOUDAMQP_URL'] || "amqp://guest:guest@localhost"
