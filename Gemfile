@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
-gem 'thin'
+ruby '2.1.0'
+gem 'puma'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'haml'
-gem 'amqp'
+gem 'bunny'

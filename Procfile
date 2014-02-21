@@ -1,1 +1,1 @@
-web: thin start -p $PORT -e production
+web: puma -p $PORT -e production -t 2:128
