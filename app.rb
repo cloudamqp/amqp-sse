@@ -16,6 +16,7 @@ get '/' do
 end
 
 post '/publish' do
+  puts "Threads: #{Thread.list.size}"
   B.with_channel do |ch|
     ch.fanout("f1").publish "Hello, world!"
   end
@@ -25,22 +26,22 @@ end
 get '/stream', provides: 'text/event-stream' do
   channel = B.create_channel
   q = channel.queue('', exclusive: true).bind(channel.fanout("f1"))
-  stream :keep_open do |out|
-    q.subscribe do |_, _, payload|
-      out << "data: #{payload}\n\n"
-    end
-
+  stream do |out|
     # add a timer to keep the connection alive 
-    t = Thread.new { sleep 20; out << ":\n" }
+    t = Thread.new { sleep 50; out << ":\n" }
     # clean up when the user closes the stream
     out.callback do
+      puts "callback"
       t.kill
       channel.close
     end
     out.errback do |err|
-      puts "errback", err
+      puts "errback"
       t.kill
       channel.close
+    end
+    q.subscribe(block: true) do |_, _, payload|
+      out << "data: #{payload}\n\n"
     end
   end
 end
