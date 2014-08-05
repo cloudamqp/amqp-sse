@@ -1,0 +1,10 @@
+{
+  "name": "Ruby AMQP Sample App",
+  "description": "Ruby Sinatra app illustrating how to use Server Sent Events and AMQP for realtime updates",
+  "repository": "https://github.com/cloudamqp/amqp-sse",
+  "logo": "http://www.cloudamqp.com/images/rabbit_256.png",
+  "keywords": ["ruby", "amqp", "cloudamqp", "rabbitmq"],
+  "addons": [
+	"cloudamqp"
+  ]
+}
