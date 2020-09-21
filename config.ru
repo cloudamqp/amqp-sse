@@ -1,2 +1,5 @@
+$stdout.sync = true
+$stderr.sync = true
+
 require './app'
-run Sinatra::Application 
+run Sinatra::Application
