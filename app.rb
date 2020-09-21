@@ -7,7 +7,7 @@ configure do
   disable :logging
   EM.next_tick do
     # Connect to CloudAMQP and set the default connection
-    url = ENV['CLOUDAMQP_URL'] || "amqp://guest:guest@localhost"
+    url = ENV['CLOUDAMQP_URL'] || "amqp://guest:guest@127.0.0.1"
     AMQP.connection = AMQP.connect url
     PUB_CHAN = AMQP::Channel.new
   end
@@ -33,8 +33,8 @@ get '/stream', provides: 'text/event-stream' do
         end
       end
 
-      # add a timer to keep the connection alive 
-      timer = EM.add_periodic_timer(20) { out << ":\n" } 
+      # add a timer to keep the connection alive
+      timer = EM.add_periodic_timer(20) { out << ":\n" }
 
       # clean up when the user closes the stream
       out.callback do
