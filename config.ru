@@ -1,5 +1,5 @@
 $stdout.sync = true
 $stderr.sync = true
 
-require './app'
+require "./app"
 run Sinatra::Application
